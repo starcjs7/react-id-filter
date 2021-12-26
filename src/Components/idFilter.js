@@ -4,45 +4,45 @@ import logo_youtube from '../Images/youtube_mini_logo.png'
 import logo_x from '../Images/x_mini_logo.png'
 import '../Style/style.css'
 
-var a = `
-민트_초ㅋ (dmsnwl94): 아하
-middleage_: 혹시 최하급보석 많으신분~
-햝햝햝햝 (forke1212): 횃불 인벤에 넣는가 안넣는가 보고있습니다 후후아
-민트_초ㅋ (dmsnwl94): 어쩐지 이야기 하는게 맛갈나게 잘 푸시더라고
-불멸의거너스 (kikwsi): 웹소설 작가가 목표이신가요?
-불멸의거너스 (kikwsi): 아하..ㅎㅎ 하시면 챙겨볼게요!
-gun6750: 저요!
-불멸의거너스 (kikwsi): 저 어제 아트마요~
-middleage_: 저요~
-쉬리한마리 (wnssl611): ㄱ
-민트_초ㅋ (dmsnwl94): 아하2
-`
-var b = `
+// var a = `
+// 민트_초ㅋ (dmsnwl94): 아하
+// middleage_: 혹시 최하급보석 많으신분~
+// 햝햝햝햝 (forke1212): 횃불 인벤에 넣는가 안넣는가 보고있습니다 후후아
+// 민트_초ㅋ (dmsnwl94): 어쩐지 이야기 하는게 맛갈나게 잘 푸시더라고
+// 불멸의거너스 (kikwsi): 웹소설 작가가 목표이신가요?
+// 불멸의거너스 (kikwsi): 아하..ㅎㅎ 하시면 챙겨볼게요!
+// gun6750: 저요!
+// 불멸의거너스 (kikwsi): 저 어제 아트마요~
+// middleage_: 저요~
+// 쉬리한마리 (wnssl611): ㄱ
+// 민트_초ㅋ (dmsnwl94): 아하2
+// `
+// var b = `
 
-foofoo woo
-​와 탈갑이네 먹으려고 2주동안 다녔는데 안나오네요
+// foofoo woo
+// ​와 탈갑이네 먹으려고 2주동안 다녔는데 안나오네요
 
-glory kim
-​엘드리치 나눔좀 .
+// glory kim
+// ​엘드리치 나눔좀 .
 
-박세연
-​주시면 감사하겠습니당 ^^;;
+// 박세연
+// ​주시면 감사하겠습니당 ^^;;
 
-foofoo woo
-​탈갑이나 탈목 드랍으로 드신분 계시나요 혹시 ?
+// foofoo woo
+// ​탈갑이나 탈목 드랍으로 드신분 계시나요 혹시 ?
 
-티님t
-​안녕하세요~~ 늦었네요~
+// 티님t
+// ​안녕하세요~~ 늦었네요~
 
-박세연
-​저요!
+// 박세연
+// ​저요!
 
-aaaaaa
-​아
+// aaaaaa
+// ​아
 
-glory kim
-​저요~~
-`
+// glory kim
+// ​저요~~
+// `
 
 const removeBlank = (arr) => {
     const arrResult = arr.reduce(function (result, data) {
@@ -193,13 +193,13 @@ const IdFilter = () => {
             <div className="content">
                 <div className="content_box chatting">
                     <div className="twitch_chatting_box">
-                        <img src={logo_twitch} className={'logo_twitch'} />
+                        <img src={logo_twitch} className={'logo_twitch'} alt="" />
                         <label>Twitch Chatting</label>
                         <textarea onChange={onChangeTextArea} ref={twitchTextAreaRef} />
                     </div>
 
                     <div className="youtube_chatting_box">
-                        <img src={logo_youtube} className={'logo_youtube'} />
+                        <img src={logo_youtube} className={'logo_youtube'} alt="" />
                         <label>Youtube Chatting</label>
                         <textarea onChange={onChangeTextArea} ref={youtubeTextAreaRef} />
                     </div>
@@ -215,7 +215,7 @@ const IdFilter = () => {
                             return (
                                 <Fragment key={idx}>
                                     <div className="winner_box" style={ data.platform === 'overlab' ? {backgroundColor:'red'} : {}}>
-                                        <img src={data.platform === 'twitch' ? logo_twitch : data.platform === 'youtube' ? logo_youtube : logo_x} />
+                                        <img src={data.platform === 'twitch' ? logo_twitch : data.platform === 'youtube' ? logo_youtube : logo_x} alt="" />
                                         <label className="winner_id">{data.id}</label>
                                         <label className="winner_msg">{data.msg}</label>
                                     </div>

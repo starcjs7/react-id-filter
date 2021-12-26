@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+// import React, { useState } from 'react';
 import './App.css';
 
 import { BrowserRouter, Routes ,Route } from 'react-router-dom';
@@ -10,21 +11,21 @@ import { BrowserRouter, Routes ,Route } from 'react-router-dom';
 
 import IdFilter from './Components/idFilter'
 
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 
 const App = () => {
-  const [name, setName] = useState('')
+  // const [name, setName] = useState('')
 
-  const page = useSelector((state) => {
-    return state.pageReducer.page
-  });
+  // const page = useSelector((state) => {
+  //   return state.pageReducer.page
+  // });
 
-  const onNameInputChange = (e) => {
-    setName(e.target.value);
-    // dispatch({type:'SET_NAME', name: e.target.value})
-    // console.log(name)
-  }
+  // const onNameInputChange = (e) => {
+  //   setName(e.target.value);
+  //   // dispatch({type:'SET_NAME', name: e.target.value})
+  //   // console.log(name)
+  // }
 
   const ready = () => {
     alert("준비중입니다.")

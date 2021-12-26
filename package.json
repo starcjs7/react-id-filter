@@ -29,7 +29,6 @@
       "react-app/jest"
     ]
   },
-  "homepage": "https://github.com/starcjs7/react-id-filter.git",
   "browserslist": {
     "production": [
       ">0.2%",

@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/static/css/main.1b5bd95c.chunk.css",
-    "main.js": "/static/js/main.f5a1f976.chunk.js",
-    "main.js.map": "/static/js/main.f5a1f976.chunk.js.map",
+    "main.js": "/static/js/main.6b719531.chunk.js",
+    "main.js.map": "/static/js/main.6b719531.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.e64ba1a6.js",
     "runtime-main.js.map": "/static/js/runtime-main.e64ba1a6.js.map",
-    "static/js/2.0d3a0366.chunk.js": "/static/js/2.0d3a0366.chunk.js",
-    "static/js/2.0d3a0366.chunk.js.map": "/static/js/2.0d3a0366.chunk.js.map",
+    "static/js/2.17c93939.chunk.js": "/static/js/2.17c93939.chunk.js",
+    "static/js/2.17c93939.chunk.js.map": "/static/js/2.17c93939.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.1b5bd95c.chunk.css.map": "/static/css/main.1b5bd95c.chunk.css.map",
-    "static/js/2.0d3a0366.chunk.js.LICENSE.txt": "/static/js/2.0d3a0366.chunk.js.LICENSE.txt",
+    "static/js/2.17c93939.chunk.js.LICENSE.txt": "/static/js/2.17c93939.chunk.js.LICENSE.txt",
     "static/media/x_mini_logo.d0e2ebca.png": "/static/media/x_mini_logo.d0e2ebca.png",
     "static/media/youtube_mini_logo.05708571.png": "/static/media/youtube_mini_logo.05708571.png"
   },
   "entrypoints": [
     "static/js/runtime-main.e64ba1a6.js",
-    "static/js/2.0d3a0366.chunk.js",
+    "static/js/2.17c93939.chunk.js",
     "static/css/main.1b5bd95c.chunk.css",
-    "static/js/main.f5a1f976.chunk.js"
+    "static/js/main.6b719531.chunk.js"
   ]
 }
