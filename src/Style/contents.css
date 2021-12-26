@@ -1,0 +1,82 @@
+.pageRouter button{
+    width:120px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+    margin: 0 8px;
+    border: 1px solid #47c6a3;
+    background-color: #282c34;
+    color:#fff;
+    cursor: pointer;
+}
+.pageRouter button.active{
+    background-color: #47c6a3;
+}
+
+#id_filter textarea{
+    width: 90%;
+    height: 360px;
+    resize: none;
+}
+#id_filter .top_menu label{
+    font-size: 20px;
+}
+#id_filter .top_menu input[type="text"]{
+    height:30px;
+    font-size: 18px;
+    border-radius: 6px;
+    margin-right: 40px;
+}
+#id_filter .top_menu input[type="checkbox"]{
+    width:30px;
+    height:30px;
+}
+
+#id_filter .twitch_chatting_box > label,
+#id_filter .youtube_chatting_box > label{
+    text-align: center;
+}
+#id_filter .content_box.result .result_banner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #888;
+    border-radius: 12px;
+}
+#id_filter .content_box.result .result_banner > h2{
+    text-align: center;
+}
+#id_filter .content_box.result .result_banner > button{
+    height:24px;
+    position: absolute;
+    right: 5%;
+    background-color: #d3d3d3;
+    border:none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#id_filter .content_box.result .result_banner > button:hover{
+    background-color: #fff;
+}
+#id_filter img{
+    width:24px;
+    height:24px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#id_filter .content_box.result .winner_box .winner_id {
+    display: inline-block;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+#id_filter .content_box.result .winner_box .winner_msg {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

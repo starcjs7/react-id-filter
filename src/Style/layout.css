@@ -1,0 +1,40 @@
+/* Main Top Page Router */
+.pageRouter{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+#id_filter{
+    display: flex;
+    flex-direction: column;
+}
+#id_filter .top_menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid #888;
+}
+#id_filter .content{
+    width: 100%;
+    display: flex;
+}
+
+#id_filter .content_box.chatting{
+    width: 40%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#id_filter .content_box.result{
+    width: 55%;
+    padding: 10px;
+}
+#id_filter .content_box.result .winner_box{
+    display: flex;
+    padding: 6px 0;
+}
