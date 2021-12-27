@@ -155,8 +155,8 @@ img.logo{
 }
 
 #quiz .content_box.option input.point{
-    width:60px;
-    height:60px;
+    width:54px;
+    height:54px;
     font-size: 40px;
     text-align: center;
 }
@@ -175,4 +175,16 @@ img.logo{
     height:40px;
     font-size: 20px;
     text-align: center;
+}
+#quiz .content_box.history .history_id{
+    display: inline-block;
+    width: auto;
+    max-width: 200px;
+    border: 1px solid #888;
+    border-radius: 14px;
+    padding: 2px 8px;
+    margin: 2px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

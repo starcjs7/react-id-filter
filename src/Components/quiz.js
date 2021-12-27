@@ -32,6 +32,9 @@ const IdFilter = () => {
     const youtubeTextAreaRef = useRef();
     const pointRef = useRef();
 
+    const [history, setHistory] = useState([]);
+    const [historyCount, setHistoryCount] = useState(1);
+
     const [searchText, setSearchText] = useState('');
     const [overlabChecked, setOverlabChecked] = useState(true);
 
@@ -48,12 +51,12 @@ const IdFilter = () => {
             const arr = chattingTextList[i];
             const msg = chattingTextList[i].msg;
             // 검색에서 공백은 Pass
-            if(searchText !== ''){
+            if (searchText !== '') {
                 // 검색어 구분 ','로 하고 배열을 돌음
-                for(const i in searchArr){
+                for (const i in searchArr) {
                     const searchItem = searchArr[i];
                     // 검색어 사이 공백은 pass
-                    if(searchItem !== ''){
+                    if (searchItem !== '') {
                         const isSearchText = msg.indexOf(searchArr[i].trim());
                         if (isSearchText > -1) {
                             tempArr.push(arr)
@@ -130,47 +133,52 @@ const IdFilter = () => {
         // 체크박스에 체크된 애들만 넣기위해서 아래 로직 진행
         let tempWinnerList = [...winnerList]
         const arrCheckbox = document.getElementsByName('checkbox')
-        for(let i = arrCheckbox.length - 1; i >= 0; i--){
-            if(arrCheckbox[i].checked === false){
+        for (let i = arrCheckbox.length - 1; i >= 0; i--) {
+            if (arrCheckbox[i].checked === false) {
                 tempWinnerList.splice(i, 1);
             }
         }
 
-        let tempAddList = [...tempWinnerList]
+        let tempAddList = [...tempWinnerList];
+        let tempHistoryList = [...tempWinnerList];
 
         // 기존 값 있으면 점수 더하기
-        for(let i = tempFinalList.length - 1; i >= 0; i--){
+        for (let i = tempFinalList.length - 1; i >= 0; i--) {
             const item = tempFinalList[i];
 
-            for(let j = tempWinnerList.length - 1; j >= 0; j--){
+            for (let j = tempWinnerList.length - 1; j >= 0; j--) {
                 const jtem = tempWinnerList[j];
-                if(item.id === jtem.id){
+                if (item.id === jtem.id) {
                     tempFinalList[i] = {
                         id: item.id,
                         platform: item.platform,
-                        
+
                         point: (parseInt(item.point) + parseInt(value))
                     }
                     tempAddList.splice(j, 1);
                 }
             }
         }
-        
+
         // 새로운 멤버들 추가
         const arr = tempAddList.map((data) => {
-            const item = {platform: data.platform, id: data.id, point: 1}
+            const item = { platform: data.platform, id: data.id, point: parseInt(value) }
             return item;
-        } )
+        })
         tempFinalList = [...tempFinalList, ...arr];
 
         // Rank 별로 Order by 정렬
-        tempFinalList.sort((a, b) => { 
+        tempFinalList.sort((a, b) => {
             if (a.point < b.point)
-                return 1; 
+                return 1;
             if (a.point > b.point)
-                return -1; 
-            return 0; 
-            });
+                return -1;
+            return 0;
+        });
+
+        if(tempHistoryList.length > 0){
+            setHistory(prev => [...prev, { data: tempHistoryList }])
+        }
 
         setFinalWinnerList(tempFinalList);
     }
@@ -209,7 +217,7 @@ const IdFilter = () => {
             </div>
 
             <div className="content">
-            <div className="content_box chatting">
+                <div className="content_box chatting">
                     <div className="twitch_chatting_box">
                         <img src={logo_twitch} className={'logo logo_twitch'} alt="" />
                         <label>Twitch Chatting</label>
@@ -223,52 +231,87 @@ const IdFilter = () => {
                     </div>
                 </div>
 
-                <div className="content_box result">
-                    <div className="result_banner">
-                        <h2>정답자 {winnerList.length}명</h2>
+                <div className="content_box board">
+                    <div className="content_box board_box">
+                        <div className="content_box result">
+                            <div className="result_banner">
+                                <h2>정답자 {winnerList.length}명</h2>
+                            </div>
+                            {
+                                winnerList.map((data, idx) => {
+                                    return (
+                                        <Fragment key={idx}>
+                                            <div className="winner_box" style={data.overlab === true ? { backgroundColor: 'red' } : {}}>
+                                                <input type='checkbox' id={'check_' + idx} name="checkbox" defaultChecked="true" />
+                                                <img src={data.platform === 'twitch' ? logo_twitch : data.platform === 'youtube' ? logo_youtube : logo_x} className="logo" alt="" />
+                                                <label className="winner_id" htmlFor={'check_' + idx}>{data.id}</label>
+                                                <label className="winner_msg" htmlFor={'check_' + idx}>{data.msg}</label>
+                                            </div>
+                                        </Fragment>
+                                    )
+                                })
+                            }
+                        </div>
+
+                        <div className="content_box option">
+                            <label>추가할 점수</label>
+                            <input type="number" className="point" defaultValue={1} maxLength={2} ref={pointRef} />
+                            <button onClick={onClickAddWinner}>〉</button>
+                        </div>
+
+                        <div className="content_box final">
+                            <div className="final_banner">
+                                <h2>최종 점수판</h2>
+                                {/* <button onClick={onClickWinnerListCopy}>ID 복사</button> */}
+                            </div>
+                            {
+                                finalWinnerList.map((data, idx) => {
+                                    return (
+                                        <Fragment key={idx}>
+                                            <div className="winner_box">
+                                                <img src={data.platform === 'twitch' ? logo_twitch : logo_youtube} className="logo" alt="" />
+                                                <label className="winner_id">{data.id}</label>
+                                                <label className="winner_msg">{data.point}</label>
+                                            </div>
+                                        </Fragment>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
-                    {
-                        winnerList.map((data, idx) => {
-                            return (
-                                <Fragment key={idx}>
-                                    <div className="winner_box" style={ data.overlab === true ? {backgroundColor:'red'} : {}}>
-                                        <input type='checkbox' id={'check_' + idx} name="checkbox" defaultChecked="true" />
-                                        <img src={data.platform === 'twitch' ? logo_twitch : data.platform === 'youtube' ? logo_youtube : logo_x} className="logo" alt="" />
-                                        <label className="winner_id" htmlFor={'check_' + idx}>{data.id}</label>
-                                        <label className="winner_msg" htmlFor={'check_' + idx}>{data.msg}</label>
-                                    </div>
-                                </Fragment>
-                            )
-                        })
-                    }
+                    <div className='content_box history'>
+                        <h2>history</h2>
+                            {
+                                history.map((data, idx) => {
+                                    console.log(history)
+                                    const idTagList = data.data.map((item) => {
+                                        return(
+                                            <label className='history_id'>{item.id}</label>
+                                        )
+                                    })
+
+                                    return(
+                                        <div className='history_box'>
+                                            <p>{idx + 1}번째 정답자</p>
+                                            {idTagList}
+                                        </div>
+                                    )
+
+                                    // {data.map((item) => {
+                                    //     return (
+                                    //     <label>
+                                    //         ddd
+                                    //     </label>
+                                    //     )
+                                    // })}
+                                    
+                                            
+
+                                })
+                            }
+                    </div>
                 </div>
                 
-                <div className="content_box option">
-                    <label>추가할 점수</label>
-                    <input type="number" className="point" defaultValue={1} maxLength={2} ref={pointRef} />
-                    <button onClick={onClickAddWinner}>〉</button>
-                </div>
-
-                <div className="content_box final">
-                    <div className="final_banner">
-                        <h2>최종 점수판</h2>
-                        {/* <button onClick={onClickWinnerListCopy}>ID 복사</button> */}
-                    </div>
-                    {
-                        finalWinnerList.map((data, idx) => {
-                            return (
-                                <Fragment key={idx}>
-                                    <div className="winner_box">
-                                        <img src={data.platform === 'twitch' ? logo_twitch : logo_youtube} className="logo" alt="" />
-                                        <label className="winner_id">{data.id}</label>
-                                        <label className="winner_msg">{data.point}</label>
-                                    </div>
-                                </Fragment>
-                            )
-                        })
-                    }
-                </div>
-
             </div>
         </div>
     );
