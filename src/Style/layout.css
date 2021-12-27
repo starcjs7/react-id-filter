@@ -2,10 +2,14 @@
 .pageRouter{
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 10px 0;
+    border-bottom: 1px solid #888;
+    color: #888
 }
 
-#id_filter{
+#id_filter,
+#quiz{
     display: flex;
     flex-direction: column;
 }
@@ -15,7 +19,6 @@
     justify-content: center;
     width: 100%;
     height: 50px;
-    border-top: 1px solid #888;
 }
 #id_filter .content{
     width: 100%;
@@ -23,18 +26,72 @@
 }
 
 #id_filter .content_box.chatting{
-    width: 40%;
+    width: 30%;
     padding: 10px;
     display: flex;
     flex-direction: column;
     text-align: center;
 }
-
+#id_filter .content_box.applicant{
+    width: 20%;
+    padding: 10px;
+    max-height: 776px;
+    overflow-y: auto;
+}
+#id_filter .content_box.applicant .applicant_box{
+    display: flex;
+    padding: 1px 0;
+}
 #id_filter .content_box.result{
-    width: 55%;
+    width: 44%;
     padding: 10px;
 }
 #id_filter .content_box.result .winner_box{
     display: flex;
+    padding: 6px 0;
+}
+/********************************************************/
+#quiz .top_menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+}
+#quiz .content{
+    width: 100%;
+    display: flex;
+}
+#quiz .content_box.chatting{
+    width: 30%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+#quiz .content_box.result{
+    width: 30%;
+    padding: 10px;
+}
+#quiz .content_box.result .winner_box{
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+}
+#quiz .content_box.option{
+    width: 10%;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#quiz .content_box.final{
+    width: 24%;
+    padding: 10px;
+}
+#quiz .content_box.final .winner_box{
+    display: flex;
+    align-items: center;
     padding: 6px 0;
 }

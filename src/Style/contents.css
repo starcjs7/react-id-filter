@@ -13,21 +13,25 @@
     background-color: #47c6a3;
 }
 
-#id_filter textarea{
+#id_filter textarea,
+#quiz textarea{
     width: 90%;
     height: 360px;
     resize: none;
 }
-#id_filter .top_menu label{
+#id_filter .top_menu label,
+#quiz .top_menu label{
     font-size: 20px;
 }
-#id_filter .top_menu input[type="text"]{
+#id_filter .top_menu input[type="text"],
+#quiz .top_menu input[type="text"]{
     height:30px;
     font-size: 18px;
     border-radius: 6px;
     margin-right: 40px;
 }
-#id_filter .top_menu input[type="checkbox"]{
+#id_filter .top_menu input[type="checkbox"],
+#quiz .top_menu input[type="checkbox"]{
     width:30px;
     height:30px;
 }
@@ -36,14 +40,16 @@
 #id_filter .youtube_chatting_box > label{
     text-align: center;
 }
-#id_filter .content_box.result .result_banner{
+#id_filter .content_box.result .result_banner,
+#id_filter .content_box.applicant .applicant_banner{
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #888;
     border-radius: 12px;
 }
-#id_filter .content_box.result .result_banner > h2{
+#id_filter .content_box.result .result_banner > h2,
+#id_filter .content_box.applicant .applicant_banner > h2{
     text-align: center;
 }
 #id_filter .content_box.result .result_banner > button{
@@ -58,11 +64,27 @@
 #id_filter .content_box.result .result_banner > button:hover{
     background-color: #fff;
 }
-#id_filter img{
+img.logo{
     width:24px;
     height:24px;
     display: inline-block;
     vertical-align: middle;
+}
+
+#id_filter .content_box.applicant .applicant_box .applicant_id {
+    display: inline-block;
+    width: 44%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+#id_filter .content_box.applicant .applicant_box .applicant_msg {
+    display: inline-block;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 #id_filter .content_box.result .winner_box .winner_id {
@@ -79,4 +101,78 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+/*****************************************************/
+#quiz .twitch_chatting_box > label,
+#quiz .youtube_chatting_box > label{
+    text-align: center;
+}
+#quiz .content_box.result .result_banner,
+#quiz .content_box.final .final_banner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #888;
+    border-radius: 12px;
+}
+#quiz .content_box.result .result_banner > h2,
+#quiz .content_box.final .final_banner > h2{
+    text-align: center;
+}
+#quiz .content_box.result .winner_box .winner_id{
+    display: inline-block;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+#quiz .content_box.final .winner_box .winner_id {
+    display: inline-block;
+    width: 78%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+#quiz .content_box.result .winner_box .winner_msg{
+    display: inline-block;
+    width: 38%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#quiz .content_box.final .winner_box .winner_msg {
+    display: inline-block;
+    width: 20%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#quiz .content_box.result .winner_box input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+}
+
+#quiz .content_box.option input.point{
+    width:60px;
+    height:60px;
+    font-size: 40px;
+    text-align: center;
+}
+#quiz .content_box.option label{
+    font-size: 20px;
+}
+
+#quiz .point::-webkit-outer-spin-button,
+#quiz .point::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#quiz .content_box.option button{
+    margin: 10px 0;
+    width:40px;
+    height:40px;
+    font-size: 20px;
+    text-align: center;
 }

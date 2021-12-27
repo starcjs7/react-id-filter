@@ -4,46 +4,6 @@ import logo_youtube from '../Images/youtube_mini_logo.png'
 import logo_x from '../Images/x_mini_logo.png'
 import '../Style/style.css'
 
-// var a = `
-// 민트_초ㅋ (dmsnwl94): 아하
-// middleage_: 혹시 최하급보석 많으신분~
-// 햝햝햝햝 (forke1212): 횃불 인벤에 넣는가 안넣는가 보고있습니다 후후아
-// 민트_초ㅋ (dmsnwl94): 어쩐지 이야기 하는게 맛갈나게 잘 푸시더라고
-// 불멸의거너스 (kikwsi): 웹소설 작가가 목표이신가요?
-// 불멸의거너스 (kikwsi): 아하..ㅎㅎ 하시면 챙겨볼게요!
-// gun6750: 저요!
-// 불멸의거너스 (kikwsi): 저 어제 아트마요~
-// middleage_: 저요~
-// 쉬리한마리 (wnssl611): ㄱ
-// 민트_초ㅋ (dmsnwl94): 아하2
-// `
-// var b = `
-
-// foofoo woo
-// ​와 탈갑이네 먹으려고 2주동안 다녔는데 안나오네요
-
-// glory kim
-// ​엘드리치 나눔좀 .
-
-// 박세연
-// ​주시면 감사하겠습니당 ^^;;
-
-// foofoo woo
-// ​탈갑이나 탈목 드랍으로 드신분 계시나요 혹시 ?
-
-// 티님t
-// ​안녕하세요~~ 늦었네요~
-
-// 박세연
-// ​저요!
-
-// aaaaaa
-// ​아
-
-// glory kim
-// ​저요~~
-// `
-
 const removeBlank = (arr) => {
     const arrResult = arr.reduce(function (result, data) {
         if (data !== '')
@@ -58,7 +18,8 @@ const parsingDatas = (arr, platform) => {
         const json = {
             platform,
             id: data.substring(0, data.indexOf(':')).trim(),
-            msg: data.substring(data.indexOf(':') + 1, data.length).trim()
+            msg: data.substring(data.indexOf(':') + 1, data.length).trim(),
+            overlab: false
         }
         return json;
     });
@@ -69,12 +30,15 @@ const IdFilter = () => {
     const overlabRemoveCheckboxRef = useRef();
     const twitchTextAreaRef = useRef();
     const youtubeTextAreaRef = useRef();
+    const pointRef = useRef();
 
     const [searchText, setSearchText] = useState('');
     const [overlabChecked, setOverlabChecked] = useState(true);
 
     const [chattingTextList, setChattingTextList] = useState([]);
     const [winnerList, setWinnerList] = useState([]);
+
+    const [finalWinnerList, setFinalWinnerList] = useState([]);
 
     useEffect(() => {
         let tempArr = []
@@ -115,9 +79,10 @@ const IdFilter = () => {
                     });
                     if (subFilter.length < 1) {
                         result.push({
-                            platform: 'overlab',
+                            platform: data.platform,
                             id: data.id,
-                            msg: data.msg
+                            msg: data.msg,
+                            overlab: true
                         })
                     }
                 }
@@ -142,19 +107,72 @@ const IdFilter = () => {
         setOverlabChecked(isChecked)
     }
 
-    const onClickWinnerListCopy = (e) => {
-        let copyIDList = '';
-        for (const i in winnerList) {
-            copyIDList += winnerList[i].id + '\n'
-        }
-        const t = document.createElement("textarea");
-        document.body.appendChild(t);
-        t.value = copyIDList;
-        t.select();
-        document.execCommand('copy');
-        document.body.removeChild(t);
+    // const onClickWinnerListCopy = (e) => {
+    //     let copyIDList = '';
+    //     for (const i in winnerList) {
+    //         copyIDList += winnerList[i].id + '\n'
+    //     }
+    //     const t = document.createElement("textarea");
+    //     document.body.appendChild(t);
+    //     t.value = copyIDList;
+    //     t.select();
+    //     document.execCommand('copy');
+    //     document.body.removeChild(t);
 
-        alert('복사되었습니다.')
+    //     alert('복사되었습니다.')
+    // }
+
+    const onClickAddWinner = () => {
+        const value = pointRef.current.value;
+
+        let tempFinalList = [...finalWinnerList]
+
+        // 체크박스에 체크된 애들만 넣기위해서 아래 로직 진행
+        let tempWinnerList = [...winnerList]
+        const arrCheckbox = document.getElementsByName('checkbox')
+        for(let i = arrCheckbox.length - 1; i >= 0; i--){
+            if(arrCheckbox[i].checked === false){
+                tempWinnerList.splice(i, 1);
+            }
+        }
+
+        let tempAddList = [...tempWinnerList]
+
+        // 기존 값 있으면 점수 더하기
+        for(let i = tempFinalList.length - 1; i >= 0; i--){
+            const item = tempFinalList[i];
+
+            for(let j = tempWinnerList.length - 1; j >= 0; j--){
+                const jtem = tempWinnerList[j];
+                if(item.id === jtem.id){
+                    tempFinalList[i] = {
+                        id: item.id,
+                        platform: item.platform,
+                        
+                        point: (parseInt(item.point) + parseInt(value))
+                    }
+                    tempAddList.splice(j, 1);
+                }
+            }
+        }
+        
+        // 새로운 멤버들 추가
+        const arr = tempAddList.map((data) => {
+            const item = {platform: data.platform, id: data.id, point: 1}
+            return item;
+        } )
+        tempFinalList = [...tempFinalList, ...arr];
+
+        // Rank 별로 Order by 정렬
+        tempFinalList.sort((a, b) => { 
+            if (a.point < b.point)
+                return 1; 
+            if (a.point > b.point)
+                return -1; 
+            return 0; 
+            });
+
+        setFinalWinnerList(tempFinalList);
     }
 
     const onChangeTextArea = (e) => {
@@ -181,10 +199,10 @@ const IdFilter = () => {
     }
 
     return (
-        <div id="id_filter">
+        <div id="quiz">
             <div className="top_menu">
-                <label>검색어: </label>
-                <input type='text' onChange={onChangeSearchText} placeholder='검색어1, 검색어2' />
+                <label>정답: </label>
+                <input type='text' onChange={onChangeSearchText} />
 
                 <label>중복 표시</label>
                 <input type="checkbox" defaultChecked="true" onChange={onChangeOverlabCheckbox} ref={overlabRemoveCheckboxRef} />
@@ -205,39 +223,45 @@ const IdFilter = () => {
                     </div>
                 </div>
 
-                <div className="content_box applicant">
-                    <div className="applicant_banner">
-                        <h2>전체 채팅</h2>
-                        {/* <button onClick={onClickWinnerListCopy}>ID 복사</button> */}
+                <div className="content_box result">
+                    <div className="result_banner">
+                        <h2>정답자 {winnerList.length}명</h2>
                     </div>
                     {
-                        chattingTextList.map((data, idx) => {
+                        winnerList.map((data, idx) => {
                             return (
                                 <Fragment key={idx}>
-                                    <div className="applicant_box">
-                                        <img src={data.platform === 'twitch' ? logo_twitch : logo_youtube} className='logo' alt="" />
-                                        <label className="applicant_id">{data.id}</label>
-                                        <label className="applicant_msg">{data.msg}</label>
+                                    <div className="winner_box" style={ data.overlab === true ? {backgroundColor:'red'} : {}}>
+                                        <input type='checkbox' id={'check_' + idx} name="checkbox" defaultChecked="true" />
+                                        <img src={data.platform === 'twitch' ? logo_twitch : data.platform === 'youtube' ? logo_youtube : logo_x} className="logo" alt="" />
+                                        <label className="winner_id" htmlFor={'check_' + idx}>{data.id}</label>
+                                        <label className="winner_msg" htmlFor={'check_' + idx}>{data.msg}</label>
                                     </div>
                                 </Fragment>
                             )
                         })
                     }
                 </div>
+                
+                <div className="content_box option">
+                    <label>추가할 점수</label>
+                    <input type="number" className="point" defaultValue={1} maxLength={2} ref={pointRef} />
+                    <button onClick={onClickAddWinner}>〉</button>
+                </div>
 
-                <div className="content_box result">
-                    <div className="result_banner">
-                        <h2>당첨자 {winnerList.length}명</h2>
-                        <button onClick={onClickWinnerListCopy}>ID 복사</button>
+                <div className="content_box final">
+                    <div className="final_banner">
+                        <h2>최종 점수판</h2>
+                        {/* <button onClick={onClickWinnerListCopy}>ID 복사</button> */}
                     </div>
                     {
-                        winnerList.map((data, idx) => {
+                        finalWinnerList.map((data, idx) => {
                             return (
                                 <Fragment key={idx}>
-                                    <div className="winner_box" style={ data.platform === 'overlab' ? {backgroundColor:'red'} : {}}>
-                                        <img src={data.platform === 'twitch' ? logo_twitch : data.platform === 'youtube' ? logo_youtube : logo_x} className='logo' alt="" />
+                                    <div className="winner_box">
+                                        <img src={data.platform === 'twitch' ? logo_twitch : logo_youtube} className="logo" alt="" />
                                         <label className="winner_id">{data.id}</label>
-                                        <label className="winner_msg">{data.msg}</label>
+                                        <label className="winner_msg">{data.point}</label>
                                     </div>
                                 </Fragment>
                             )
