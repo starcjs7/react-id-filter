@@ -13,6 +13,13 @@
     background-color: #47c6a3;
 }
 
+.pageRouter img.trademark{
+    position: absolute;
+    right: 0;
+    width: 60px;
+    height: 60px;
+}
+
 #id_filter textarea,
 #quiz textarea{
     width: 90%;

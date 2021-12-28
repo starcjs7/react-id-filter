@@ -33,7 +33,6 @@ const IdFilter = () => {
     const pointRef = useRef();
 
     const [history, setHistory] = useState([]);
-    const [historyCount, setHistoryCount] = useState(1);
 
     const [searchText, setSearchText] = useState('');
     const [overlabChecked, setOverlabChecked] = useState(true);
@@ -110,21 +109,6 @@ const IdFilter = () => {
         setOverlabChecked(isChecked)
     }
 
-    // const onClickWinnerListCopy = (e) => {
-    //     let copyIDList = '';
-    //     for (const i in winnerList) {
-    //         copyIDList += winnerList[i].id + '\n'
-    //     }
-    //     const t = document.createElement("textarea");
-    //     document.body.appendChild(t);
-    //     t.value = copyIDList;
-    //     t.select();
-    //     document.execCommand('copy');
-    //     document.body.removeChild(t);
-
-    //     alert('복사되었습니다.')
-    // }
-
     const onClickAddWinner = () => {
         const value = pointRef.current.value;
 
@@ -146,8 +130,8 @@ const IdFilter = () => {
         for (let i = tempFinalList.length - 1; i >= 0; i--) {
             const item = tempFinalList[i];
 
-            for (let j = tempWinnerList.length - 1; j >= 0; j--) {
-                const jtem = tempWinnerList[j];
+            for (let j = tempAddList.length - 1; j >= 0; j--) {
+                const jtem = tempAddList[j];
                 if (item.id === jtem.id) {
                     tempFinalList[i] = {
                         id: item.id,
@@ -283,7 +267,6 @@ const IdFilter = () => {
                         <h2>history</h2>
                             {
                                 history.map((data, idx) => {
-                                    console.log(history)
                                     const idTagList = data.data.map((item) => {
                                         return(
                                             <label className='history_id'>{item.id}</label>
@@ -296,17 +279,6 @@ const IdFilter = () => {
                                             {idTagList}
                                         </div>
                                     )
-
-                                    // {data.map((item) => {
-                                    //     return (
-                                    //     <label>
-                                    //         ddd
-                                    //     </label>
-                                    //     )
-                                    // })}
-                                    
-                                            
-
                                 })
                             }
                     </div>

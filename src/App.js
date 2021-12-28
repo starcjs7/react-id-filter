@@ -12,6 +12,11 @@ import { Routes ,Route, useNavigate } from 'react-router-dom';
 import IdFilter from './Components/idFilter'
 import Quiz from './Components/quiz'
 
+// import AngryBird from './Images/angry_bird.jpg'
+// import HelltakerLucy from './Images/helltaker_lucy2.gif'
+import HelltakerLucy from './Images/helltaker_vanripper.gif'
+// import HelltakerLucy from './Images/kotori.png'
+
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -64,33 +69,13 @@ const App = () => {
           <button className={path === '/' ? 'active' : ''} onClick={() => onClickPage('idFilter')}>아이디 중복 제거</button>
           <button className={path === '/quiz' ? 'active' : ''} onClick={() => onClickPage('quiz')}>백수 퀴즈</button>
           <label>※ 이동 시 데이터 삭제</label>
-          {/* <button className={page === 'idFilter' ? 'active' : ''} onClick={() => onClickPage('idFilter')}>아이디 중복 제거</button>
-          <button className={page === 'quiz' ? 'active' : ''} onClick={() => onClickPage('quiz')}>백수 퀴즈</button> */}
+          
+          <img src={HelltakerLucy} className="trademark" />
         </div>
         <Routes>
           <Route path='/' element={<IdFilter />} />
           <Route path='/quiz' element={<Quiz />} />
         </Routes>
-        {/* <div className="rowDiv">
-        {
-          (() => {
-            if(page !== 'complete')
-              return <input type="text" className="optionNameInput" onChange={onNameInputChange} placeholder="이름" />
-          })()
-        }
-        </div>
-        {
-          (() => {
-            if(page === 'first') 
-              return <FirstQuestion />
-            else if(page === 'second') 
-              return <SecondQuestion />
-            else if(page === 'third') 
-              return <ThirdQuestion name={name} />
-            else if (page === 'complete')
-              return <Complete />
-          })()
-        } */}
       </header>
     </div>
   );
