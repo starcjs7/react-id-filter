@@ -39,8 +39,9 @@ const IdFilter = () => {
 
     const [chattingTextList, setChattingTextList] = useState([]);
     const [winnerList, setWinnerList] = useState([]);
-
     const [finalWinnerList, setFinalWinnerList] = useState([]);
+    const [scoreBack, setScoreBack] = useState([]);
+
 
     useEffect(() => {
         let tempArr = []
@@ -161,9 +162,12 @@ const IdFilter = () => {
         });
 
         if(tempHistoryList.length > 0){
+            // 점수판 history 기록
             setHistory(prev => [...prev, { data: tempHistoryList }])
-        }
 
+            // 점수판 되돌리기 기능을 위한 기록
+            setScoreBack(prev => [...prev, { data: tempFinalList }])
+        }
         setFinalWinnerList(tempFinalList);
     }
 
@@ -188,6 +192,41 @@ const IdFilter = () => {
         const arrResult = [...arrTwitch, ...arrYoutube]
 
         setChattingTextList(arrResult)
+    }
+
+    const onClickFinalWinnerListCopy = (e) => {
+        // 체크박스에 체크된 애들만 넣기위해서 아래 로직 진행
+        let tempWinnerList = [...finalWinnerList]
+        const arrCheckbox = document.getElementsByName('final_checkbox')
+
+        for (let i = arrCheckbox.length - 1; i >= 0; i--) {
+            if (arrCheckbox[i].checked === false) {
+                tempWinnerList.splice(i, 1);
+            }
+        }
+
+        let tempAddList = [...tempWinnerList];
+        let copyIDList = '';
+
+        if(tempAddList.length > 0){
+            for (const i in tempAddList) {
+                copyIDList += tempAddList[i].id + '\n'
+            }
+            const t = document.createElement("textarea");
+            document.body.appendChild(t);
+            t.value = copyIDList;
+            t.select();
+            document.execCommand('copy');
+            document.body.removeChild(t);
+    
+            alert('복사되었습니다.')
+        }
+    }
+
+    const onClickScoreBack = (e, idx) => {
+        setFinalWinnerList(scoreBack[idx].data)
+
+        alert(String(idx + 1) + "번째 점수판으로 변경되었습니다.")
     }
 
     return (
@@ -246,13 +285,14 @@ const IdFilter = () => {
                         <div className="content_box final">
                             <div className="final_banner">
                                 <h2>최종 점수판</h2>
-                                {/* <button onClick={onClickWinnerListCopy}>ID 복사</button> */}
+                                <button onClick={onClickFinalWinnerListCopy}>ID 복사</button>
                             </div>
                             {
                                 finalWinnerList.map((data, idx) => {
                                     return (
                                         <Fragment key={idx}>
                                             <div className="winner_box">
+                                                <input type='checkbox' id={'final_check_' + idx} name="final_checkbox" />
                                                 <img src={data.platform === 'twitch' ? logo_twitch : logo_youtube} className="logo" alt="" />
                                                 <label className="winner_id">{data.id}</label>
                                                 <label className="winner_msg">{data.point}</label>
@@ -263,6 +303,20 @@ const IdFilter = () => {
                             }
                         </div>
                     </div>
+
+                    <div className='content_box scoreback'>
+                        <h2>점수판 되돌리기</h2>
+                        <div className='scoreback_box'>
+                            {
+                                scoreBack.map((data, idx) => {
+                                    return (
+                                        <label className='scoreback_num' onClick={(e) => onClickScoreBack(e, idx)} >{idx + 1}번째 점수판</label>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+
                     <div className='content_box history'>
                         <h2>history</h2>
                             {

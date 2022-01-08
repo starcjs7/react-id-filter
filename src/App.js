@@ -11,6 +11,7 @@ import { Routes ,Route, useNavigate } from 'react-router-dom';
 
 import IdFilter from './Components/idFilter'
 import Quiz from './Components/quiz'
+import TwoHeart from './Components/twoHeart'
 
 // import AngryBird from './Images/angry_bird.jpg'
 // import HelltakerLucy from './Images/helltaker_lucy2.gif'
@@ -29,7 +30,6 @@ const App = () => {
   const url = window.location.href;
   const path = url.substring(url.lastIndexOf('/'), url.length)
 
-  console.log(path)
   const page = useSelector((state) => {
     return state.pageReducer.page
   });
@@ -40,26 +40,29 @@ const App = () => {
   //   // console.log(name)
   // }
 
-  // const ready = () => {
-  //   alert("준비중입니다.")
-  // }
+  const ready = () => {
+    alert("준비중입니다.")
+  }
 
   const onClickPage = (page) => {
     switch(page){
       case 'idFilter':
         navigate('/');
-        dispatch({type:'pageReducer/SET_IDFILTER'});
+        dispatch({ type: 'pageReducer/SET_IDFILTER' });
         break;
       case 'quiz':
         navigate('/quiz');
-        dispatch({type:'pageReducer/SET_QUIZ'});
+        dispatch({ type: 'pageReducer/SET_QUIZ' });
+        break;
+      case 'twoHeart':
+        navigate('/twoHeart');
+        dispatch({ type: 'pageReducer/SET_TWOHEART' });
         break;
       default:
         navigate('/');
         dispatch({type:'pageReducer/SET_IDFILTER'});
         break;
     }
-
   }
 
   return (
@@ -68,6 +71,8 @@ const App = () => {
         <div className="pageRouter">
           <button className={path === '/' ? 'active' : ''} onClick={() => onClickPage('idFilter')}>아이디 중복 제거</button>
           <button className={path === '/quiz' ? 'active' : ''} onClick={() => onClickPage('quiz')}>백수 퀴즈</button>
+          {/* <button className={path === '/twoHeart' ? 'active' : ''} onClick={() => onClickPage('twoHeart')}>以心傳心</button> */}
+          <button className={path === '/twoHeart' ? 'active' : ''} onClick={() => ready()}>以心傳心</button>
           <label>※ 이동 시 데이터 삭제</label>
           
           <img src={HelltakerLucy} className="trademark" />
@@ -75,6 +80,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<IdFilter />} />
           <Route path='/quiz' element={<Quiz />} />
+          <Route path='/twoHeart' element={<TwoHeart />} />
         </Routes>
       </header>
     </div>

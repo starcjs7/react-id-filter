@@ -5,6 +5,7 @@
 // const SET_RANDOMWHEEL   = 'pageReducer/SET_RANDOMWHEEL'
 const SET_IDFILTER     = 'pageReducer/SET_IDFILTER'
 const SET_QUIZ      = 'pageReducer/SET_QUIZ'
+const SET_TWOHEART      = 'pageReducer/SET_TWOHEART'
 
 // Action Creator Function ( 액션 생성 함수 )
 export const setSecondPage = page => ({ type: SET_IDFILTER, page });
@@ -22,6 +23,7 @@ const pageReducer = (state = initState, action) => {
 
         case SET_IDFILTER: return { ...state, page: 'idFilter' }
         case SET_QUIZ: return { ...state, page: 'quiz' }
+        case SET_TWOHEART: return { ...state, page: 'twoHeart' }
         // case SET_COMPLETEPAGE: return { ...state, page: 'complete' }
         // case SET_RANDOMWHEEL: return { ...state, page: 'randomWheel' }
 
