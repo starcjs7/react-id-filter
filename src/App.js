@@ -71,8 +71,8 @@ const App = () => {
         <div className="pageRouter">
           <button className={path === '/' ? 'active' : ''} onClick={() => onClickPage('idFilter')}>아이디 중복 제거</button>
           <button className={path === '/quiz' ? 'active' : ''} onClick={() => onClickPage('quiz')}>백수 퀴즈</button>
-          {/* <button className={path === '/twoHeart' ? 'active' : ''} onClick={() => onClickPage('twoHeart')}>以心傳心</button> */}
-          <button className={path === '/twoHeart' ? 'active' : ''} onClick={() => ready()}>以心傳心</button>
+          <button className={path === '/twoHeart' ? 'active' : ''} onClick={() => onClickPage('twoHeart')}>以心傳心</button>
+          {/* <button className={path === '/twoHeart' ? 'active' : ''} onClick={() => ready()}>以心傳心</button> */}
           <label>※ 이동 시 데이터 삭제</label>
           
           <img src={HelltakerLucy} className="trademark" />

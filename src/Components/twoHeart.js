@@ -37,28 +37,48 @@ const IdFilter = () => {
     const [winnerList, setWinnerList] = useState([]);
 
     useEffect(() => {
+
+        const searchText_Upper = searchText.toUpperCase();
+        const searchTextLength = searchText.length;
+
         let tempArr = []
         // 검색어들만 tempArr에 push
-        const searchArr = searchText.split(',');
         for (const i in chattingTextList) {
             const arr = chattingTextList[i];
-            const msg = chattingTextList[i].msg;
+            const msg = chattingTextList[i].msg.toUpperCase();
+
+            let point = 0;
+
             // 검색에서 공백은 Pass
-            if(searchText !== ''){
-                // 검색어 구분 ','로 하고 배열을 돌음
-                for(const i in searchArr){
-                    const searchItem = searchArr[i];
-                    // 검색어 사이 공백은 pass
-                    if(searchItem !== ''){
-                        const isSearchText = msg.indexOf(searchArr[i].trim());
-                        if (isSearchText > -1) {
-                            tempArr.push(arr)
-                            break;
+            if(searchText_Upper !== ''){
+                // 검색어 사이 공백은 pass
+                    if(searchText_Upper !== ''){
+
+                        for(const j in searchText_Upper){
+                            if(searchText_Upper[j] === msg[j]){
+                                point++
+                            }
                         }
+                        
+                        const percent  = Math.ceil(point * (100 / searchTextLength));
+                        tempArr.push({
+                            platform: arr.platform,
+                            id: arr.id,
+                            msg: msg,
+                            percent: percent
+                        })
                     }
-                }
             }
         }
+
+        // Rank 별로 Order by 정렬
+        tempArr.sort((a, b) => {
+            if (a.percent < b.percent)
+                return 1;
+            if (a.percent > b.percent)
+                return -1;
+            return 0;
+        });
 
         // 중복 제거 체크박스 체크 여부(체크되어 있으면 중복제거)
         if (overlabChecked) {
@@ -77,7 +97,8 @@ const IdFilter = () => {
                         result.push({
                             platform: 'overlab',
                             id: data.id,
-                            msg: data.msg
+                            msg: data.msg,
+                            percent: data.percent
                         })
                     }
                 }
@@ -144,7 +165,7 @@ const IdFilter = () => {
         <div id="id_filter">
             <div className="top_menu">
                 <label>검색어: </label>
-                <input type='text' onChange={onChangeSearchText} placeholder='검색어1, 검색어2' />
+                <input type='text' onChange={onChangeSearchText} placeholder='검색어1' />
 
                 <label>중복 표시</label>
                 <input type="checkbox" defaultChecked="true" onChange={onChangeOverlabCheckbox} ref={overlabRemoveCheckboxRef} />
@@ -187,7 +208,7 @@ const IdFilter = () => {
 
                 <div className="content_box result">
                     <div className="result_banner">
-                        <h2>당첨자 {winnerList.length}명</h2>
+                        <h2>일치율</h2>
                         <button onClick={onClickWinnerListCopy}>ID 복사</button>
                     </div>
                     {
@@ -198,6 +219,7 @@ const IdFilter = () => {
                                         <img src={data.platform === 'twitch' ? logo_twitch : data.platform === 'youtube' ? logo_youtube : logo_x} className='logo' alt="" />
                                         <label className="winner_id">{data.id}</label>
                                         <label className="winner_msg">{data.msg}</label>
+                                        <label className="winner_msg">{data.percent} %</label>
                                     </div>
                                 </Fragment>
                             )
