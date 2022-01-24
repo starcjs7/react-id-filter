@@ -292,7 +292,3 @@ img.logo{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-#twoHeart .content_box.result .winner_box input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-}
