@@ -45,7 +45,9 @@ const IdFilter = () => {
         // 검색어들만 tempArr에 push
         for (const i in chattingTextList) {
             const arr = chattingTextList[i];
-            const msg = chattingTextList[i].msg.toUpperCase();
+            // const msg = chattingTextList[i].msg.toUpperCase().replace(/\s|,/gi, '');
+            const msg = chattingTextList[i].msg.toUpperCase().replace(/[^A-Z|a-z]/gi, '');
+            console.log(msg)
 
             let point = 0;
 
@@ -124,18 +126,35 @@ const IdFilter = () => {
     }
 
     const onClickWinnerListCopy = (e) => {
-        let copyIDList = '';
-        for (const i in winnerList) {
-            copyIDList += winnerList[i].id + '\n'
-        }
-        const t = document.createElement("textarea");
-        document.body.appendChild(t);
-        t.value = copyIDList;
-        t.select();
-        document.execCommand('copy');
-        document.body.removeChild(t);
+        // 체크박스에 체크된 애들만 넣기위해서 아래 로직 진행
+        let tempWinnerList = [...winnerList]
+        const arrCheckbox = document.getElementsByName('twoHeart_checkbox')
 
-        alert('복사되었습니다.')
+        for (let i = arrCheckbox.length - 1; i >= 0; i--) {
+            if (arrCheckbox[i].checked === false) {
+                tempWinnerList.splice(i, 1);
+            }
+        }
+
+        let tempAddList = [...tempWinnerList];
+        let copyIDList = '';
+
+        console.log(tempAddList)
+        console.log(winnerList)
+
+        if (tempAddList.length > 0) {
+            for (const i in tempAddList) {
+                copyIDList += tempAddList[i].id + '\n'
+            }
+            const t = document.createElement("textarea");
+            document.body.appendChild(t);
+            t.value = copyIDList;
+            t.select();
+            document.execCommand('copy');
+            document.body.removeChild(t);
+
+            alert('복사되었습니다.')
+        }
     }
 
     const onChangeTextArea = (e) => {
@@ -162,7 +181,7 @@ const IdFilter = () => {
     }
 
     return (
-        <div id="id_filter">
+        <div id="twoHeart">
             <div className="top_menu">
                 <label>검색어: </label>
                 <input type='text' onChange={onChangeSearchText} placeholder='검색어1' />
@@ -216,6 +235,7 @@ const IdFilter = () => {
                             return (
                                 <Fragment key={idx}>
                                     <div className="winner_box" style={ data.platform === 'overlab' ? {backgroundColor:'red'} : {}}>
+                                        <input type='checkbox' id={'twoHeart_check_' + idx} name="twoHeart_checkbox" />
                                         <img src={data.platform === 'twitch' ? logo_twitch : data.platform === 'youtube' ? logo_youtube : logo_x} className='logo' alt="" />
                                         <label className="winner_id">{data.id}</label>
                                         <label className="winner_msg">{data.msg}</label>

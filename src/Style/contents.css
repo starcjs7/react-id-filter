@@ -212,3 +212,87 @@ img.logo{
 #quiz .content_box.scoreback .scoreback_num:hover{
     background-color: #888;
 }
+/* two heart */
+#twoHeart textarea,
+#quiz textarea{
+    width: 90%;
+    height: 360px;
+    resize: none;
+}
+#twoHeart .top_menu label{
+    font-size: 20px;
+}
+#twoHeart .top_menu input[type="text"]{
+    height:30px;
+    font-size: 18px;
+    border-radius: 6px;
+    margin-right: 40px;
+}
+#twoHeart .top_menu input[type="checkbox"]{
+    width:30px;
+    height:30px;
+}
+
+#twoHeart .twitch_chatting_box > label,
+#twoHeart .youtube_chatting_box > label{
+    text-align: center;
+}
+#twoHeart .content_box.result .result_banner,
+#twoHeart .content_box.applicant .applicant_banner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #888;
+    border-radius: 12px;
+}
+#twoHeart .content_box.result .result_banner > h2,
+#twoHeart .content_box.applicant .applicant_banner > h2{
+    text-align: center;
+}
+#twoHeart .content_box.result .result_banner > button{
+    height:24px;
+    position: absolute;
+    right: 5%;
+    background-color: #d3d3d3;
+    border:none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#twoHeart .content_box.result .result_banner > button:hover{
+    background-color: #fff;
+}
+#twoHeart .content_box.applicant .applicant_box .applicant_id {
+    display: inline-block;
+    width: 44%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+#twoHeart .content_box.applicant .applicant_box .applicant_msg {
+    display: inline-block;
+    width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#twoHeart .content_box.result .winner_box .winner_id {
+    display: inline-block;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+#twoHeart .content_box.result .winner_box .winner_msg {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#twoHeart .content_box.result .winner_box input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+}

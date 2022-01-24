@@ -9,10 +9,12 @@
 }
 
 #id_filter,
-#quiz{
+#quiz,
+#twoHeart{
     display: flex;
     flex-direction: column;
 }
+
 #id_filter .top_menu{
     display: flex;
     align-items: center;
@@ -140,5 +142,44 @@
 #quiz .content_box.final .winner_box{
     display: flex;
     align-items: center;
+    padding: 6px 0;
+}
+/*******************************************/
+
+#twoHeart .top_menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+}
+#twoHeart .content{
+    width: 100%;
+    display: flex;
+}
+
+#twoHeart .content_box.chatting{
+    width: 30%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+#twoHeart .content_box.applicant{
+    width: 20%;
+    padding: 10px;
+    max-height: 776px;
+    overflow-y: auto;
+}
+#twoHeart .content_box.applicant .applicant_box{
+    display: flex;
+    padding: 1px 0;
+}
+#twoHeart .content_box.result{
+    width: 44%;
+    padding: 10px;
+}
+#twoHeart .content_box.result .winner_box{
+    display: flex;
     padding: 6px 0;
 }
